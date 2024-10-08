@@ -1,6 +1,6 @@
 # make3DRecordThumbnail
 
-Make a thumbnail for 3D data csv record.
+Make a thumbnail for 3D data csv records.
 
 ## Dependencies
 To install dependencis with conda:
