@@ -2,10 +2,7 @@
 
 Make a thumbnail for 3D data csv record.
 
-
-## Installation
-
-### Dependencies
+## Dependencies
 To install dependencis with conda:
 ```
 conda create -n 3dtb numpy matplotlib pandas
@@ -15,7 +12,7 @@ To activate enviroment
 conda activate 3dtb
 ```
 
-### Test
+## Test
 
 To test script
 
