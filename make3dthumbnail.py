@@ -76,9 +76,9 @@ def readData(pathDir):
         # add users ids
         ids.append(uId) 
         fileNames.append(f.split('.')[0])
-        #print('uId', uId,'f',f)
+        print('uId', uId,'f',f)
         dfU = pd.read_csv(pathDir+'/'+f,index_col=False)
-        #print('columns',dfU.columns)
+        print('columns',dfU.columns,len(dfU))
         dfU.columns = dfU.columns.str.lstrip()
         #print('columns',dfU.columns)
         dfU['ID'] = uId
