@@ -74,16 +74,18 @@ def readData(pathDir):
 
     for uId,f in enumerate(listCSVs):
         # add users ids
-        ids.append(uId) 
-        fileNames.append(f.split('.')[0])
         print('uId', uId,'f',f)
         dfU = pd.read_csv(pathDir+'/'+f,index_col=False)
         print('columns',dfU.columns,len(dfU))
-        dfU.columns = dfU.columns.str.lstrip()
-        #print('columns',dfU.columns)
-        dfU['ID'] = uId
-        dfU['filename'] =f.split('.')[0]
-        dfUs.append(dfU)
+        if len(dfU) > 0:
+            ids.append(uId) 
+            fileNames.append(f.split('.')[0])
+            dfU.columns = dfU.columns.str.lstrip()
+            print('columns',dfU.columns)
+            #print('columns',dfU.columns)
+            dfU['ID'] = uId
+            dfU['filename'] =f.split('.')[0]
+            dfUs.append(dfU)
     return ids, fileNames, dfUs, pd.concat(dfUs,ignore_index=True)
 
 def getVR(dfS):  
