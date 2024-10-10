@@ -49,20 +49,20 @@ def readData(pathDir):
 
     Examples:
     --------
-    >>> ids, fileNames, dfUs, df = readData('./csv-Test/')
+    >>> ids, fileNames, dfUs = readData('./csv-Test/')
     >>> ids
     [0, 1, 2, 3]
     >>> fileNames
     ['U0', 'U1', 'U2', 'U3']
     >>> dfUs[1].index
     RangeIndex(start=0, stop=3, step=1)
-    >>> 'time' in df.columns
+    >>> 'time' in dfUs[1].columns
     True
-    >>> 'posx' in df.columns
+    >>> 'posx' in dfUs[1].columns
     True
-    >>> 'fx' in df.columns
+    >>> 'fx' in dfUs[1].columns
     True
-    >>> 'dirx' in df.columns
+    >>> 'dirx' in dfUs[1].columns
     True
     """
     dfUs = [] 
@@ -74,19 +74,18 @@ def readData(pathDir):
 
     for uId,f in enumerate(listCSVs):
         # add users ids
-        print('uId', uId,'f',f)
+        #print('uId', uId,'f',f)
         dfU = pd.read_csv(pathDir+'/'+f,index_col=False)
-        print('columns',dfU.columns,len(dfU))
-        if len(dfU) > 0:
-            ids.append(uId) 
-            fileNames.append(f.split('.')[0])
-            dfU.columns = dfU.columns.str.lstrip()
-            print('columns',dfU.columns)
-            #print('columns',dfU.columns)
-            dfU['ID'] = uId
-            dfU['filename'] =f.split('.')[0]
-            dfUs.append(dfU)
-    return ids, fileNames, dfUs, pd.concat(dfUs,ignore_index=True)
+        #print('columns',dfU.columns,len(dfU))
+        ids.append(uId) 
+        fileNames.append(f.split('.')[0])
+        dfU.columns = dfU.columns.str.lstrip()
+        #print('columns',dfU.columns)
+        #print('columns',dfU.columns)
+        dfU['ID'] = uId
+        dfU['filename'] =f.split('.')[0]
+        dfUs.append(dfU)
+    return ids, fileNames, dfUs
 
 def getVR(dfS):  
     """Gets VR state navigation modality from a session data frames.
@@ -213,7 +212,7 @@ def getPaths(ids,dfSs,listCols = ['posx','posy','posz']):
 
     Examples:
     --------
-    >>> ids, fileNames, dfSs, df = readData('csv-Test/')
+    >>> ids, fileNames, dfSs = readData('csv-Test/')
     >>> paths = getPaths(ids,dfSs)
     >>> len(paths)
     4
@@ -261,7 +260,7 @@ def getVarsFromSession(path,varsName):
            [ 2.   ,  0.222, -0.779, -0.586],
            [ 3.   ,  0.254, -0.648, -0.718]])
     """
-    ids, fileNames, dfSs, df = readData(path)
+    ids, fileNames, dfSs = readData(path)
 
     #print('varN',varN)
     if varsName == 'nav':
