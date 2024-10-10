@@ -99,10 +99,14 @@ def getVR(dfS):
         Array with true values when navigation modality is VR
     """
 
-    assert (('Time' in dfS.columns) or ('time' in dfS.columns))  , "neither Time or time in csv columns: "+dfS.columns
-    timeCol = 'Time'
-    if not 'Time' in dfS.columns:
+    assert (('Time' in dfS.columns) or ('time' in dfS.columns) or ('t' in dfS.columns))  , "neither Time or time or t in csv columns: "+dfS.columns
+    
+    if 'Time' in dfS.columns:
+        timeCol = 'Time'
+    elif 'time' in dfS.columns:
         timeCol = 'time'    
+    elif 't' in dfS.columns:
+        timeCol = 't'  
 
     t =  dfS[timeCol].values
     nav = np.zeros((len(t),2))
@@ -127,7 +131,7 @@ def getAR(dfS):
         Array with true values when navigation modality is AR
     """
 
-    assert (('Time' in dfS.columns) or ('time' in dfS.columns) or ('t' in dfS.columns))  , "neither Time or time in csv columns: "+dfS.columns
+    assert (('Time' in dfS.columns) or ('time' in dfS.columns) or ('t' in dfS.columns))  , "neither Time or time or t in csv columns: "+dfS.columns
     
     if 'Time' in dfS.columns:
         timeCol = 'Time'
@@ -179,10 +183,14 @@ def getPath(dfS,listCols = ['posx','posy','posz']):
         Array of navigation
     """
 
-    assert (('Time' in dfS.columns) or ('time' in dfS.columns))  , "neither Time or time in csv columns: "+dfS.columns
-    timeCol = 'Time'
-    if not 'Time' in dfS.columns:
-        timeCol = 'time'
+    assert (('Time' in dfS.columns) or ('time' in dfS.columns) or ('t' in dfS.columns))  , "neither Time or time or t in csv columns: "+dfS.columns
+    
+    if 'Time' in dfS.columns:
+        timeCol = 'Time'
+    elif 'time' in dfS.columns:
+        timeCol = 'time'    
+    elif 't' in dfS.columns:
+        timeCol = 't'
 
     t =  dfS[timeCol].values
     path = np.zeros((len(t),len(listCols)+1))
