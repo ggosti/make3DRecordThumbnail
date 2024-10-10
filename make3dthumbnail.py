@@ -70,6 +70,7 @@ def readData(pathDir):
     fileNames = []
 
     listCSVs = [f for f in os.listdir(pathDir) if f.split('.')[-1] == 'csv']
+    listCSVs.sort()
 
     for uId,f in enumerate(listCSVs):
         # add users ids
